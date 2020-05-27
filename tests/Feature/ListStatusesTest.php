@@ -17,7 +17,6 @@ class ListStatusesTest extends TestCase
 
     function can_get_all_statuses() {
 
-        $this->withoutExceptionHandling();
 
         $status1 = factory(Status::class)->create(['created_at' => now()->subDay(4)]);
         $status2 = factory(Status::class)->create(['created_at' => now()->subDay(3)]);
