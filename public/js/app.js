@@ -50024,7 +50024,12 @@ var staticRenderFns = [
     return _c("div", { staticClass: " d-flex align-items-center mb-3" }, [
       _c("img", {
         staticClass: "rounded mr-3 shadow",
-        attrs: { width: "40px", src: "Imagen-2.jpg", alt: "" }
+        attrs: {
+          width: "40px",
+          src:
+            "https://image.shutterstock.com/image-vector/people-icon-vector-user-symbol-600w-1714434235.jpg",
+          alt: ""
+        }
       }),
       _vm._v(" "),
       _c("div", {}, [

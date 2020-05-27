@@ -3,7 +3,7 @@
         <div class="card border-0 mb-3 shadow" v-for="status in statuses">
             <div class="card-body d-flex flex-column">
                 <div class=" d-flex align-items-center mb-3">
-                <img class="rounded mr-3 shadow" width="40px" src="Imagen-2.jpg" alt="">
+                <img class="rounded mr-3 shadow" width="40px" src="https://image.shutterstock.com/image-vector/people-icon-vector-user-symbol-600w-1714434235.jpg" alt="">
                     <div class="">
                         <h5 class="mb-1">Marruan Adib</h5>
                         <div class="small text-muted" >Hace una hora</div>
