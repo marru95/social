@@ -13,8 +13,6 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::truncate();
-
-
-        factory(User::class)->create(['email' => 'marru@gmail.com']);
+        factory(User::class)->create(['email'=>'marru@gmail.com', 'name'=>'Marru']);
     }
 }

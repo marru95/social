@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('content')
     <div class="container">
         <div class="row">
@@ -11,13 +10,13 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Email:</label>
-                                <input class="form-control" type="email" name="email" placeholder="Tu nombre...">
+                                <input class="form-control border-0" type="email" name="email" placeholder="Tu correo electrónico">
                             </div>
                             <div class="form-group">
                                 <label>Contraseña:</label>
-                             <input class="form-control" type="password" name="password" placeholder="Tu contraseña...">
+                                <input class="form-control border-0" type="password" name="password" placeholder="Tu contraseña">
                             </div>
-                            <button class="btn btn-primary btn-block" id="login-btn">Login</button>
+                                <button class="btn btn-primary btn-block" id="login-btn">Login</button>
                         </div>
                     </form>
                 </div>

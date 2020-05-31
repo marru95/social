@@ -6,29 +6,28 @@ use App\User;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Throwable;
 
 class UsersCanCreateStatusesTest extends DuskTestCase
 {
     use DatabaseMigrations;
     /**
      * A Dusk test example.
-     *
      * @test
-     * @throws \Throwable
+     * @return void
+     * @throws Throwable
      */
-    //Los usuarios peuden crear estados
     public function users_can_create_statuses()
     {
+        $user=factory(User::class)->create();
 
-        $user = factory(User::class)->create();
-
-        $this->browse(function (Browser $browser) use ($user) {
-            $browser->loginAs($user) //Usuario con el que queremos hacer login
+        $this->browse(function (Browser $browser) use ($user){
+            $browser->loginAs($user)
                     ->visit('/')
-                    ->type('body', "Mi primer status") // <input name="body"
+                    ->type('body', 'Mi primer estado') // <input name="body">
                     ->press('#create-status')
-                    ->waitForText('Mi primer status')
-                    ->assertSee('Mi primer status')
+                    ->waitForText('Mi primer estado')
+                    ->assertSee('Mi primer estado')
                     ->assertSee($user->name)
             ;
         });

@@ -15,7 +15,6 @@ mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');
 
 mix.browserSync({
-    proxy: 'http://social.local',
-    open: false
-
+   proxy: 'http://social.test',
+   open: false
 });

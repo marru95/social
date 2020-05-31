@@ -14895,9 +14895,7 @@ window.Vue = __webpack_require__(38);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
 window.EventBus = new Vue();
-
 Vue.component('status-form', __webpack_require__(42));
 Vue.component('statuses-list', __webpack_require__(48));
 
@@ -49702,7 +49700,7 @@ exports = module.exports = __webpack_require__(11)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -49759,22 +49757,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            body: ''
+            body: ""
         };
     },
 
     methods: {
-        submit: function submit() {
+        enviar: function enviar() {
             var _this = this;
 
             axios.post('/statuses', { body: this.body }).then(function (res) {
-                EventBus.$emit('status-created', res.data.data);
+                EventBus.$emit('status-created', res.data.data); // ['data'=> ['body'=>'el body']]
                 _this.body = '';
             }).catch(function (err) {
                 console.log(err.response.data);
@@ -49798,12 +49794,12 @@ var render = function() {
         on: {
           submit: function($event) {
             $event.preventDefault()
-            return _vm.submit($event)
+            return _vm.enviar($event)
           }
         }
       },
       [
-        _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "card-body border-0" }, [
           _c("textarea", {
             directives: [
               {
@@ -49814,7 +49810,7 @@ var render = function() {
               }
             ],
             staticClass: "form-control border-0 bg-light",
-            attrs: { name: "body", placeholder: "¿Qué estás pensando Marru?" },
+            attrs: { name: "body", placeholder: "¿Qué piensas, Marru?" },
             domProps: { value: _vm.body },
             on: {
               input: function($event) {
@@ -49841,7 +49837,7 @@ var staticRenderFns = [
       _c(
         "button",
         { staticClass: "btn btn-primary", attrs: { id: "create-status" } },
-        [_vm._v("Publicar ")]
+        [_vm._v("Publicar estado")]
       )
     ])
   }
@@ -49941,7 +49937,7 @@ exports = module.exports = __webpack_require__(11)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -49984,9 +49980,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }).catch(function (err) {
             console.log(err.response.data);
         });
-
         EventBus.$on('status-created', function (status) {
             _this.statuses.unshift(status);
+            console.log(status);
         });
     }
 });
@@ -50002,20 +49998,19 @@ var render = function() {
   return _c(
     "div",
     _vm._l(_vm.statuses, function(status) {
-      return _c("div", { staticClass: "card border-0 mb-3 shadow" }, [
+      return _c("div", { staticClass: "card border-0 mb-3 shadow-sm" }, [
         _c("div", { staticClass: "card-body d-flex flex-column" }, [
-          _c("div", { staticClass: " d-flex align-items-center mb-3" }, [
+          _c("div", { staticClass: "d-flex align-items-center mb-3" }, [
             _c("img", {
-              staticClass: "rounded mr-3 shadow",
+              staticClass: "rounded-circle mr-3 shadow-sm",
               attrs: {
                 width: "40px",
                 src:
-                  "https://image.shutterstock.com/image-vector/people-icon-vector-user-symbol-600w-1714434235.jpg",
-                alt: ""
+                  "https://image.shutterstock.com/image-vector/people-icon-vector-user-symbol-600w-1714434235.jpg"
               }
             }),
             _vm._v(" "),
-            _c("div", {}, [
+            _c("div", [
               _c("h5", {
                 staticClass: "mb-1",
                 domProps: { textContent: _vm._s(status.user_name) }

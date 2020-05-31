@@ -16,20 +16,18 @@ class LoginTest extends DuskTestCase
      * @test
      * @throws \Throwable
      */
-    //Usuarios registrados pueden hacer login
-
     public function registered_users_can_login()
     {
-        factory(User::class)->create(['email' => 'marruadib@gmail.com']);
-
+        factory(User::class)->create([
+            'email'=>'marru@gmail.com'
+        ]);
         $this->browse(function (Browser $browser) {
             $browser->visit('/login')
-                    ->type('email', 'marruadib@gmail.com')
+                    ->type('email', 'marru@gmail.com')
                     ->type('password', 'secret')
                     ->press('#login-btn')
                     ->assertPathIs('/')
-                    ->assertAuthenticated()
-            ;
+                    ->assertAuthenticated();
         });
     }
 }
