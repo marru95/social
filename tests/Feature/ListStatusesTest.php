@@ -17,6 +17,7 @@ class ListStatusesTest extends TestCase
 
     function can_get_all_statuses() {
 
+        $this->withoutExceptionHandling();
 
         $status1 = factory(Status::class)->create(['created_at' => now()->subDay(4)]);
         $status2 = factory(Status::class)->create(['created_at' => now()->subDay(3)]);
@@ -28,16 +29,16 @@ class ListStatusesTest extends TestCase
         $response->assertSuccessful();
 
         $response->assertJson([
-           'total' => 4
+           'meta' => ['total' => 4]
         ]);
 
         $response->assertJsonStructure([
-            'data', 'total', 'first_page_url', 'last_page_url'
+            'data', 'links' => ['prev', 'next']
         ]);
 
         $this->assertEquals(
-            $status4->id,
-            $response->json('data.0.id')
+            $status4->body,
+            $response->json('data.0.body')
 
         );
 

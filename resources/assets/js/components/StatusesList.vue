@@ -5,8 +5,8 @@
                 <div class=" d-flex align-items-center mb-3">
                 <img class="rounded mr-3 shadow" width="40px" src="https://image.shutterstock.com/image-vector/people-icon-vector-user-symbol-600w-1714434235.jpg" alt="">
                     <div class="">
-                        <h5 class="mb-1">Marruan Adib</h5>
-                        <div class="small text-muted" >Hace una hora</div>
+                        <h5 class="mb-1" v-text="status.user_name"></h5>
+                        <div class="small text-muted" v-text="status.ago"></div>
                     </div>
                 </div>
                 <p class="card-text text-secondary" v-text="status.body"></p>

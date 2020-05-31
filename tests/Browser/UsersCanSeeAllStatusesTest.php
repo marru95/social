@@ -19,11 +19,17 @@ class UsersCanSeeAllStatusesTest extends DuskTestCase
         $statuses = factory(Status::class, 3)->create();
 
         $this->browse(function (Browser $browser) use ($statuses){
+
             $browser->visit('/')
                     ->waitForText($statuses->first()->body);
 
+
+
             foreach ($statuses as $status) {
-                $browser->assertSee($status->body);
+                $browser->assertSee($status->body)
+                        ->assertSee($status->user->name)
+                        ->assertSee($status->created_at->diffForHumans())
+                ;
             }
         });
     }
