@@ -13,4 +13,12 @@ module.exports = {
 
          }
     },
+    methods:{
+        redirectIfGuest() {
+            if (this.guest) {
+                return window.location.href = '/login';
+            }
+        }
+
+    }
 };
