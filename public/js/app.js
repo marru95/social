@@ -49960,7 +49960,7 @@ exports = module.exports = __webpack_require__(11)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -49971,6 +49971,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -50015,6 +50016,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         like: function like(status) {
             axios.post('/statuses/' + status.id + '/likes').then(function (res) {
                 status.is_liked = true;
+            });
+        },
+        unlike: function unlike(status) {
+            axios.delete('/statuses/' + status.id + '/likes').then(function (res) {
+                status.is_liked = false;
             });
         }
     }
@@ -50061,8 +50067,21 @@ var render = function() {
             domProps: { textContent: _vm._s(status.body) }
           }),
           _vm._v(" "),
+          status.is_liked ? _c("button", [_vm._v("TE GUSTA")]) : _vm._e(),
+          _vm._v(" "),
           status.is_liked
-            ? _c("button", [_vm._v("TE GUSTA")])
+            ? _c(
+                "button",
+                {
+                  attrs: { dusk: "unlike-btn" },
+                  on: {
+                    click: function($event) {
+                      return _vm.unlike(status)
+                    }
+                  }
+                },
+                [_vm._v("TE GUSTA")]
+              )
             : _c(
                 "button",
                 {

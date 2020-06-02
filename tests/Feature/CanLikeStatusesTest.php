@@ -50,4 +50,25 @@ class CanLikeStatusesTest extends TestCase
             'status_id' => $status->id
         ]);
     }
+
+    /** @test */
+
+    //Un usuario autenticado puede quitar like a los estados
+    public function an_authenticated_user_can_unlike_statuses()
+    {
+        $this->withoutExceptionHandling();
+
+
+        $user = factory(User::class)->create();
+        $status = factory(Status::class)->create();
+        $this->actingAs($user)->postJson( route('statuses.likes.store', $status));
+
+        $this->actingAs($user)->deleteJson( route('statuses.likes.destroy', $status));
+
+
+        $this->assertDatabaseMissing('likes', [
+            'user_id' => $user->id,
+            'status_id' => $status->id
+        ]);
+    }
 }

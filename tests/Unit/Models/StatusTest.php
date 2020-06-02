@@ -15,7 +15,7 @@ class StatusTest extends TestCase
     /**
      * @test
      */
-    function a_status_belongs_to_a_user()
+    public function a_status_belongs_to_a_user()
 
     {
         $status=factory(Status::class)->create();
@@ -38,21 +38,25 @@ class StatusTest extends TestCase
 
     /** @test */
     //Un estado puede ser gustado
-    function a_status_can_be_liked()
+   public function a_status_can_be_liked_and_unlike()
     {
         $status = factory(Status::class)->create();
 
-        $this->actingAs( factory(User::class)->create() );
+        $this->actingAs(factory(User::class)->create());
 
         $status->like();
 
-        $this->assertEquals(1, $status->likes->count());
+        $this->assertEquals(1, $status->fresh()->likes->count());
+
+        $status->unlike();
+
+        $this->assertEquals(0, $status->fresh()->likes->count());
 
     }
 
     /** @test */
     //Un estado puede ser gustado una sola vez
-    function a_status_can_be_liked_once()
+  public function a_status_can_be_liked_once()
     {
         $status = factory(Status::class)->create();
 
@@ -60,7 +64,7 @@ class StatusTest extends TestCase
 
         $status->like();
 
-        $this->assertEquals(1, $status->likes->count());
+        $this->assertEquals(1, $status->fresh()->likes->count());
 
         $status->like();
 
@@ -69,7 +73,7 @@ class StatusTest extends TestCase
     }
 
     /** @test */
-    function a_status_knows_if_if_has_been_liked()
+   public function a_status_knows_if_if_has_been_liked()
     {
 
 

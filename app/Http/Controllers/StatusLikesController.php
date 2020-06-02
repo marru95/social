@@ -10,6 +10,10 @@ class StatusLikesController extends Controller
     public function store(Status $status)
     {
         $status->like();
+    }
 
+    public function destroy(Status $status)
+    {
+        $status->unlike();
     }
 }
