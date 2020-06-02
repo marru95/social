@@ -24,10 +24,10 @@
                         @click="like(status)"
                         class="btn btn-link btn-sm"
                         dusk="like-btn"
-                >
-                    <i class="far fa-thumbs-up text-primary mr-1"></i>
-                    ME GUSTA</button>
-
+                ><i class="far fa-thumbs-up text-primary mr-1"></i>
+                    ME GUSTA
+                </button>
+            <span dusk="likes-count">{{ status.likes_count}}</span>
             </div>
         </div>
     </div>
@@ -58,12 +58,14 @@
                 axios.post(`/statuses/${status.id}/likes`)
                  .then(res => {
                     status.is_liked = true;
+                    status.likes_count++;
                  })
             },
             unlike(status){
                 axios.delete(`/statuses/${status.id}/likes`)
                     .then(res => {
                         status.is_liked = false;
+                        status.likes_count--;
                     })
             }
         }

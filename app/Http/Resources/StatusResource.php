@@ -20,7 +20,8 @@ class StatusResource extends JsonResource
             'user_name' => $this->user->name,
             'user_avatar'=>'https://image.shutterstock.com/image-vector/people-icon-vector-user-symbol-600w-1714434235.jpg',
             'ago' => $this->created_at->diffForHumans(),
-            'is_liked' => $this->isLiked()
+            'is_liked' => $this->isLiked(),
+            'likes_count' => $this->likesCount(),
         ];
     }
 }
