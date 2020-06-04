@@ -22,8 +22,6 @@ class CommentResourceTest extends TestCase
         $commentResource = CommentResource::make($comment)->resolve();
 
 
-
-
         $this->assertEquals(
             $comment->body,
             $commentResource['body']
