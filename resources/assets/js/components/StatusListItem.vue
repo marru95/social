@@ -43,7 +43,9 @@
                                       name="comment"
                                       v-model="newComment"
                                       placeholder="Escribe un comentario..."
-                                      rows="1"></textarea>
+                                      rows="1"
+                                      required
+                            ></textarea>
                             <div class="input-group-append">
                              <button class="btn btn-primary" dusk="comment-btn">Enviar</button>
                             </div>

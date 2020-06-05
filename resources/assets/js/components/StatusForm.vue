@@ -6,7 +6,9 @@
 
                           class="form-control border-0 bg-light"
                           name="body"
-                          :placeholder="`¿Qué piensas ${currentUser.name}?`"></textarea>
+                          :placeholder="`¿Qué piensas ${currentUser.name}?`"
+                          required
+                ></textarea>
             </div>
             <div class="card-footer">
                 <button class="btn btn-primary"
