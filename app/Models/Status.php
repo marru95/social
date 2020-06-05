@@ -19,9 +19,9 @@ class Status extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public  function likes()
+    public function likes()
     {
-        return $this->hasMany(Like::class);
+        return $this->morphMany(Like::class, 'likeable');
     }
 
     public function like()
