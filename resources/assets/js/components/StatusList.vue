@@ -10,7 +10,7 @@
 </template>
 
 <script>
-    import StatusListItem from "./StatusListItem";
+    import StatusListItem from "./StatusListItem"
     export default {
         components: { StatusListItem },
         data(){
