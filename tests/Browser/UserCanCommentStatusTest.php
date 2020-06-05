@@ -2,6 +2,7 @@
 
 namespace Tests\Browser;
 
+use App\Models\Comment;
 use App\User;
 use App\Models\Status;
 use Tests\DuskTestCase;
@@ -11,6 +12,37 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 class UserCanCommentStatusTest extends DuskTestCase
 {
     use DatabaseMigrations;
+
+    /** @test  */
+    //Los usuarios pueden ver todos los estados.
+    public function users_can_see_all_comments()
+    {
+        $status = factory(Status::class)->create();
+        $comments = factory(Comment::class, 2)->create(['status_id' => $status->id]);
+
+
+
+        $this->browse(function (Browser $browser) use ($status, $comments) {
+            $browser->visit('/')
+                ->waitForText($status->body)
+                ->assertSee($comments->shift()->body)
+                ->assertSee($comments->shift()->body)
+
+
+
+            ;
+        });
+
+
+
+    }
+
+
+
+
+
+
+
 
     /** @test  */
     //Los usuarios autenticados pueden comentar estados
