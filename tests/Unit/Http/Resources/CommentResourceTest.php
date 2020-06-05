@@ -27,5 +27,15 @@ class CommentResourceTest extends TestCase
             $commentResource['body']
         );
 
+        $this->assertEquals(
+            $comment->user->name,
+            $commentResource['user_name']
+        );
+
+        $this->assertEquals(
+            'https://image.shutterstock.com/image-vector/people-icon-vector-user-symbol-600w-1714434235.jpg',
+            $commentResource['user_avatar']
+        );
+
     }
 }
