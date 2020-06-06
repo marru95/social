@@ -28,6 +28,11 @@ class CommentResourceTest extends TestCase
         );
 
         $this->assertEquals(
+            $comment->id,
+            $commentResource['id']
+        );
+
+        $this->assertEquals(
             $comment->user->name,
             $commentResource['user_name']
         );
@@ -36,6 +41,15 @@ class CommentResourceTest extends TestCase
             'https://image.shutterstock.com/image-vector/people-icon-vector-user-symbol-600w-1714434235.jpg',
             $commentResource['user_avatar']
         );
+        $this->assertEquals(
+            0,
+            $commentResource['likes_count']
+        );
+        $this->assertEquals(
+            false,
+            $commentResource['likes_liked']
+        );
+
 
     }
 }
