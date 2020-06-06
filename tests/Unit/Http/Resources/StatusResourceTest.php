@@ -38,8 +38,13 @@ class StatusResourceTest extends TestCase
             $status->user->name,
             $statusResource['user_name']
         );
+
         $this->assertEquals(
-            'https://image.shutterstock.com/image-vector/people-icon-vector-user-symbol-600w-1714434235.jpg',
+            $status->user->link(),
+            $statusResource['user_link']
+        );
+        $this->assertEquals(
+            $status->user->avatar(),
             $statusResource['user_avatar']
         );
         $this->assertEquals(
@@ -56,6 +61,7 @@ class StatusResourceTest extends TestCase
             0,
             $statusResource['likes_count']
         );
+
 
         $this->assertEquals(
             CommentResource::class,

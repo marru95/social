@@ -26,4 +26,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
+
+    public function link()
+    {
+       return route('users.show', $this);
+    }
+
+    public function avatar()
+    {
+        return 'https://image.shutterstock.com/image-vector/people-icon-vector-user-symbol-600w-1714434235.jpg';
+    }
 }

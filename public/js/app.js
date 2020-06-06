@@ -50096,13 +50096,13 @@ var content = __webpack_require__(54);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("08333107", content, false, {});
+var update = __webpack_require__(3)("3c966812", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-e6d2414c\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./StatusListItem.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-e6d2414c\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./StatusListItem.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-e6d2414c\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./StatusListItem.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-e6d2414c\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./StatusListItem.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -50120,7 +50120,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.comments-like-btn[data-v-e6d2414c] {\n  font-size: 0.6em;\n  padding-left: 0;\n}\n.comments-like-btn i[data-v-e6d2414c] {\n    display: none;\n}\n", ""]);
 
 // exports
 
@@ -50133,6 +50133,18 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LikeBtn__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__LikeBtn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__LikeBtn__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -50425,18 +50437,16 @@ var render = function() {
       _c("div", { staticClass: "d-flex align-items-center mb-3" }, [
         _c("img", {
           staticClass: "rounded-circle mr-3 shadow-sm",
-          attrs: {
-            width: "40px",
-            src:
-              "https://image.shutterstock.com/image-vector/people-icon-vector-user-symbol-600w-1714434235.jpg"
-          }
+          attrs: { width: "40px", src: _vm.status.user_avatar }
         }),
         _vm._v(" "),
         _c("div", [
-          _c("h5", {
-            staticClass: "mb-1",
-            domProps: { textContent: _vm._s(_vm.status.user_name) }
-          }),
+          _c("h5", { staticClass: "mb-1" }, [
+            _c("a", {
+              attrs: { href: _vm.status.user_link },
+              domProps: { textContent: _vm._s(_vm.status.user_name) }
+            })
+          ]),
           _vm._v(" "),
           _c("div", {
             staticClass: "small text-muted",
@@ -50482,46 +50492,65 @@ var render = function() {
       { staticClass: "card-footer" },
       [
         _vm._l(_vm.comments, function(comment) {
-          return _c(
-            "div",
-            { staticClass: "mb-3" },
-            [
+          return _c("div", { staticClass: "mb-3" }, [
+            _c("div", { staticClass: "d-flex" }, [
               _c("img", {
-                staticClass: "rounded shadow-sm float-left mr-2",
+                staticClass: "rounded shadow-sm mr-2",
                 attrs: {
+                  height: "34px",
                   width: "34px",
                   src: comment.user_avatar,
                   alt: comment.user_name
                 }
               }),
               _vm._v(" "),
-              _c("div", { staticClass: "card border-0 shadow-sm" }, [
-                _c("div", { staticClass: "card-body p-2 text-secondary" }, [
-                  _c("a", { attrs: { href: "@#" } }, [
-                    _c("strong", [_vm._v(_vm._s(comment.user_name))])
+              _c(
+                "div",
+                { staticClass: "flex-grow-1" },
+                [
+                  _c("div", { staticClass: "card border-0 shadow-sm" }, [
+                    _c("div", { staticClass: "card-body p-2 text-secondary" }, [
+                      _c("a", { attrs: { href: comment.user_link } }, [
+                        _c("strong", [_vm._v(_vm._s(comment.user_name))])
+                      ]),
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(comment.body) +
+                          "\n                        "
+                      )
+                    ])
                   ]),
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(comment.body) +
-                      "\n                    "
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { attrs: { dusk: "comment-likes-count" } }, [
-                _vm._v(_vm._s(comment.likes_count))
-              ]),
-              _vm._v(" "),
-              _c("like-btn", {
-                attrs: {
-                  dusk: "comment-like-btn",
-                  url: "/comments/" + comment.id + "/likes",
-                  model: comment
-                }
-              })
-            ],
-            1
-          )
+                  _vm._v(" "),
+                  _c(
+                    "small",
+                    {
+                      staticClass:
+                        "badge badge-pill badge-primary py-1 px-2 mt-2 float-right",
+                      attrs: { dusk: "comment-likes-count" }
+                    },
+                    [
+                      _c("i", { staticClass: "fa fa-thumbs-up" }),
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(comment.likes_count) +
+                          "\n\n                        "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("like-btn", {
+                    staticClass: "comments-like-btn",
+                    attrs: {
+                      dusk: "comment-like-btn",
+                      url: "/comments/" + comment.id + "/likes",
+                      model: comment
+                    }
+                  })
+                ],
+                1
+              )
+            ])
+          ])
         }),
         _vm._v(" "),
         _vm.isAuthenticated
@@ -50541,8 +50570,7 @@ var render = function() {
                     staticClass: "rounded shadow-sm  mr-2",
                     attrs: {
                       width: "34px",
-                      src:
-                        "https://image.shutterstock.com/image-vector/people-icon-vector-user-symbol-600w-1714434235.jpg",
+                      src: _vm.currentUser.avatar,
                       alt: _vm.currentUser.name
                     }
                   }),
