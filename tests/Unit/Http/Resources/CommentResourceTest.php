@@ -47,7 +47,7 @@ class CommentResourceTest extends TestCase
         );
         $this->assertEquals(
             false,
-            $commentResource['likes_liked']
+            $commentResource['is_liked']
         );
 
 
