@@ -32,7 +32,7 @@ class CommentResourceTest extends TestCase
             $comment->id,
             $commentResource['id']
         );
-        
+
         $this->assertEquals(
             0,
             $commentResource['likes_count']
