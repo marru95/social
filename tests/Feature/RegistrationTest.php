@@ -22,7 +22,7 @@ class RegistrationTest extends TestCase
         $response->assertRedirect('/');
 
         $this->assertDatabaseHas('users', [
-            'name' => 'MarruAdib',
+            'name' => 'MarruAdib2',
             'first_name' => 'Marru',
             'last_name' => 'Adib',
             'email' => 'marru@email.com',
@@ -69,6 +69,40 @@ class RegistrationTest extends TestCase
 
     /** @test */
 
+    public function the_name_may_not_be_at_least_3_characters()
+    {
+        $this->post(
+            route('register'),
+            $this->userValidData(['name' => 'as'])
+        ) -> assertSessionHasErrors('name');
+    }
+
+    /** @test */
+    public function the_name_must_be_unique()
+    {
+        factory(User::class)->create(['name' => 'MarruAdib']);
+        $this->post(
+            route('register'),
+            $this->userValidData(['name' => 'MarruAdib'])
+        ) -> assertSessionHasErrors('name');
+    }
+
+    /** @test */
+
+    public  function the_name_may_only_contain_letters_and_numbers()
+    {
+        $this->post(
+            route('register'),
+            $this->userValidData(['name' => 'Marru Adib'])
+        ) -> assertSessionHasErrors('name');
+
+       $this->post(
+            route('register'),
+            $this->userValidData(['name' => 'MarruAdib<>'])
+        ) -> assertSessionHasErrors('name');
+    }
+    /** @test */
+
     public function the_first_name_is_required()
     {
         $this->post(
@@ -94,6 +128,30 @@ class RegistrationTest extends TestCase
         $this->post(
             route('register'),
             $this->userValidData(['first_name' => str_random(61)])
+        ) -> assertSessionHasErrors('first_name');
+    }
+
+    /** @test */
+    public function the_first_name_may_not_be_at_least_3_characters()
+    {
+        $this->post(
+            route('register'),
+            $this->userValidData(['first_name' => 'as'])
+        ) -> assertSessionHasErrors('first_name');
+    }
+
+    /** @test */
+
+    public  function the_first_name_may_only_contain_letters()
+    {
+        $this->post(
+            route('register'),
+            $this->userValidData(['first_name' => 'Marru2'])
+        ) -> assertSessionHasErrors('first_name');
+
+        $this->post(
+            route('register'),
+            $this->userValidData(['first_name' => 'Marru<>'])
         ) -> assertSessionHasErrors('first_name');
     }
 
@@ -124,6 +182,30 @@ class RegistrationTest extends TestCase
         $this->post(
             route('register'),
             $this->userValidData(['last_name' => str_random(61)])
+        ) -> assertSessionHasErrors('last_name');
+    }
+
+    /** @test */
+    public function the_last_name_may_not_be_at_least_3_characters()
+    {
+        $this->post(
+            route('register'),
+            $this->userValidData(['last_name' => 'as'])
+        ) -> assertSessionHasErrors('last_name');
+    }
+
+    /** @test */
+
+    public  function the_last_name_may_only_contain_letters()
+    {
+        $this->post(
+            route('register'),
+            $this->userValidData(['last_name' => 'Marru2'])
+        ) -> assertSessionHasErrors('last_name');
+
+        $this->post(
+            route('register'),
+            $this->userValidData(['last_name' => 'Marru<>'])
         ) -> assertSessionHasErrors('last_name');
     }
 
@@ -209,7 +291,7 @@ class RegistrationTest extends TestCase
     public function userValidData($overrides = []): array
     {
         return array_merge([
-            'name' => 'MarruAdib',
+            'name' => 'MarruAdib2',
             'first_name' => 'Marru',
             'last_name' => 'Adib',
             'email' => 'marru@email.com',
