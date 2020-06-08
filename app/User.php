@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Status;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -25,6 +26,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $appends = ['avatar'];
+
     public function getRouteKeyName()
     {
         return 'name';
@@ -39,4 +42,16 @@ class User extends Authenticatable
     {
         return 'https://image.shutterstock.com/image-vector/people-icon-vector-user-symbol-600w-1714434235.jpg';
     }
+
+    public function statuses(){
+
+        return $this->hasMany(Status::class);
+    }
+    public function getAvatarAttribute()
+    {
+        return $this->avatar();
+    }
+
+
+
 }

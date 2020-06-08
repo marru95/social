@@ -32,7 +32,7 @@ class UsersCanRegisterTest extends DuskTestCase
     }
 
     /**
-     * @test void
+     * @test
      * @throws \Throwable
      */
 
@@ -43,7 +43,7 @@ class UsersCanRegisterTest extends DuskTestCase
                 ->type('name', '')
                 ->press('@register-btn')
                 ->assertPathIs('/register')
-                ->assertAuthenticated('@validation-errors')
+                ->assertPresent('@validation-errors')
             ;
         });
     }

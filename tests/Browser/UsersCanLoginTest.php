@@ -42,7 +42,7 @@ class UsersCanLoginTest extends DuskTestCase
                 ->type('email', '')
                 ->press('@login-btn')
                 ->assertPathIs('/login')
-                ->assertAuthenticated('@validation-errors')
+                ->assertPresent('@validation-errors')
             ;
         });
     }
