@@ -14,9 +14,12 @@ window.Vue = require('vue');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
 window.EventBus=new Vue();
-Vue.component('status-form', require('./components/StatusForm.vue'));
-Vue.component('status-list', require('./components/StatusList.vue'));
+
+Vue.component('status-form', require('./components/StatusForm'));
+Vue.component('status-list', require('./components/StatusList'));
+Vue.component('friendship-btn', require('./components/FriendshipBtn'));
 
 
 import auth from './mixins/auth';

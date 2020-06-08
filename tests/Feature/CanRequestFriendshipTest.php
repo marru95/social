@@ -12,6 +12,18 @@ class CanRequestFriendshipTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
+    //Los invitados no puedan crear solicitudes de amistad
+    public function guest_users_cannot_create_friendship_request()
+    {
+        $recipient = factory(User::class)->create();
+
+
+        $response = $this->postJson(route('friendships.store', $recipient));
+
+        $response->assertStatus(401);
+    }
+
+    /** @test */
 
     public function can_create_friendship_request()
     {
@@ -19,14 +31,21 @@ class CanRequestFriendshipTest extends TestCase
         $sender = factory(User::class)->create();
         $recipient = factory(User::class)->create();
 
-        $this->actingAs($sender)->postJson(route('friendships.store', $recipient));
+        $response = $this->actingAs($sender)->postJson(route('friendships.store', $recipient));
 
+        $response->assertJson([
+           'friendship_status' => 'pending'
+        ]);
         $this->assertDatabaseHas('friendships', [
             'sender_id' => $sender->id,
             'recipient_id' => $recipient->id,
             'status' => 'pending',
 
         ]);
+
+        $this->actingAs($sender)->postJson(route('friendships.store', $recipient));
+        $this->assertCount(1, Friendship::all());
+
 
     }
 
@@ -44,7 +63,12 @@ class CanRequestFriendshipTest extends TestCase
 
         ]);
 
-        $this->actingAs($sender)->deleteJson(route('friendships.destroy', $recipient));
+
+        $response = $this->actingAs($sender)->deleteJson(route('friendships.destroy', $recipient));
+
+        $response->assertJson([
+            'friendship_status' => 'deleted'
+        ]);
 
         $this->assertDatabaseMissing('friendships', [
             'sender_id' => $sender->id,
@@ -52,6 +76,19 @@ class CanRequestFriendshipTest extends TestCase
 
         ]);
 
+
+    }
+
+    /** @test */
+    //Los invitados no puedan crear solicitudes de amistad
+    public function guest_users_cannot_delete_friendship_request()
+    {
+        $recipient = factory(User::class)->create();
+
+
+        $response = $this->deleteJson(route('friendships.destroy', $recipient));
+
+        $response->assertStatus(401);
     }
 
     /** @test */
@@ -79,6 +116,16 @@ class CanRequestFriendshipTest extends TestCase
         ]);
 
     }
+    /** @test */
+    //Los invitados no puedan crear solicitudes de amistad
+    public function guest_users_cannot_accept_friendship_request()
+    {
+        $user = factory(User::class)->create();
+
+        $response = $this->postJson(route('accept-friendships.store', $user));
+
+        $response->assertStatus(401);
+    }
 
     /** @test */
 
@@ -100,6 +147,7 @@ class CanRequestFriendshipTest extends TestCase
 
         $this->actingAs($recipient)->deleteJson(route('accept-friendships.destroy', $sender));
 
+
         $this->assertDatabaseHas('friendships', [
             'sender_id' => $sender->id,
             'recipient_id' => $recipient->id,
@@ -107,5 +155,15 @@ class CanRequestFriendshipTest extends TestCase
 
         ]);
 
+    }
+    /** @test */
+    //Los invitados no puedan crear solicitudes de amistad
+    public function guest_users_cannot_deny_friendship_request()
+    {
+        $user = factory(User::class)->create();
+
+        $response = $this->deleteJson(route('accept-friendships.destroy', $user));
+
+        $response->assertStatus(401);
     }
 }
