@@ -20,7 +20,7 @@ class AcceptFriendshipsController extends Controller
 
     public function store(User $sender){
 
-        Friendship::where([
+        $friendship = Friendship::where([
             'sender_id' => $sender->id,
             'recipient_id' => auth()->id(),
         ])->update(['status' => 'accepted']);
