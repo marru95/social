@@ -50754,7 +50754,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -50797,7 +50797,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         toggleFriendshipStatus: function toggleFriendshipStatus() {
             var _this = this;
 
+            this.redirectIfGuest();
             var method = this.getMethod();
+
             axios[method]('friendships/' + this.recipient.name).then(function (res) {
                 _this.localFriendshipStatus = res.data.friendship_status;
             }).catch(function (err) {

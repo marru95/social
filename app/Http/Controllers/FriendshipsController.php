@@ -8,6 +8,23 @@ use Illuminate\Http\Request;
 
 class FriendshipsController extends Controller
 {
+    public function store(User $recipient)
+    {
+
+        if(auth()->id() === $recipient->id)
+        {
+            abort(400);
+        }
+
+        $friendship = Friendship::firstOrCreate([
+            'sender_id' => auth()->id(),
+            'recipient_id' => $recipient->id
+        ]);
+
+        return response()->json([
+            'friendship_status' => $friendship->fresh()->status
+        ]);
+    }
 
     public function index()
     {
@@ -18,18 +35,7 @@ class FriendshipsController extends Controller
 
         return view('friendships.index', compact('$friendshipRequests'));
     }
-    public function store(User $recipient)
-    {
 
-        $friendship = Friendship::firstOrCreate([
-            'sender_id' => auth()->id(),
-            'recipient_id' => $recipient->id
-        ]);
-
-        return response()->json([
-           'friendship_status' => $friendship->fresh()->status
-        ]);
-    }
 
     public function destroy(User $user)
     {

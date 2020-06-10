@@ -27,7 +27,9 @@
         },
         methods: {
             toggleFriendshipStatus(){
+                this.redirectIfGuest();
                 let method = this.getMethod();
+
                 axios[method](`friendships/${this.recipient.name}`)
                     .then(res => {
                        this.localFriendshipStatus = res.data.friendship_status;
