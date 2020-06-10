@@ -78,6 +78,37 @@ class CanRequestFriendshipTest extends TestCase
 
 
     }
+
+    /** @test */
+    public function senders_cannot_delete_denied_friendship_request()
+    {
+
+        $sender = factory(User::class)->create();
+        $recipient = factory(User::class)->create();
+
+        Friendship::create([
+            'sender_id' => $sender->id,
+            'recipient_id' => $recipient->id,
+            'status' => 'denied'
+
+        ]);
+
+
+        $response = $this->actingAs($sender)->deleteJson(route('friendships.destroy', $recipient));
+
+        $response->assertJson([
+            'friendship_status' => 'denied'
+        ]);
+
+        $this->assertDatabaseHas('friendships', [
+            'sender_id' => $sender->id,
+            'recipient_id' => $recipient->id,
+            'status' => 'denied'
+
+        ]);
+
+
+    }
     /** @test */
 
     public function recipient_can_delete_sent_received_friendship_request()
