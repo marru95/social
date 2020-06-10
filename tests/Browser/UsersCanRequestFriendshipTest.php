@@ -122,7 +122,7 @@ class UsersCanRequestFriendshipTest extends DuskTestCase
                 ->visit(route('accept-friendships.index'))
                 ->assertSee($sender->name)
                 ->press('@accept-friendship')
-                ->waitForText('son amigos')
+                ->waitForText('son amigos', 7)
                 ->assertSee('son amigos')
                 ->visit(route('accept-friendships.index'))
                 ->assertSee('son amigos')
