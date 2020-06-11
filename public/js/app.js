@@ -57026,10 +57026,10 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
  */
 
 window.EventBus = new Vue();
-Vue.component('status-form', __webpack_require__(/*! ./components/StatusForm */ "./resources/js/components/StatusForm.vue"));
-Vue.component('status-list', __webpack_require__(/*! ./components/StatusList */ "./resources/js/components/StatusList.vue"));
-Vue.component('friendship-btn', __webpack_require__(/*! ./components/FriendshipBtn */ "./resources/js/components/FriendshipBtn.vue"));
-Vue.component('accept-friendship-btn', __webpack_require__(/*! ./components/AcceptFriendshipBtn */ "./resources/js/components/AcceptFriendshipBtn.vue"));
+Vue.component('status-form', __webpack_require__(/*! ./components/StatusForm */ "./resources/js/components/StatusForm.vue")["default"]);
+Vue.component('status-list', __webpack_require__(/*! ./components/StatusList */ "./resources/js/components/StatusList.vue")["default"]);
+Vue.component('friendship-btn', __webpack_require__(/*! ./components/FriendshipBtn */ "./resources/js/components/FriendshipBtn.vue")["default"]);
+Vue.component('accept-friendship-btn', __webpack_require__(/*! ./components/AcceptFriendshipBtn */ "./resources/js/components/AcceptFriendshipBtn.vue")["default"]);
 
 Vue.mixin(_mixins_auth__WEBPACK_IMPORTED_MODULE_0___default.a);
 var app = new Vue({
@@ -57094,8 +57094,8 @@ if (token) {
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
-  key: "",
-  cluster: "mt1",
+  key: "af7f9461f12240b6ab7f",
+  cluster: "us2",
   encrypted: true
 });
 

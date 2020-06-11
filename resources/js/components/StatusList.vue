@@ -35,7 +35,7 @@
 
             Echo.channel('statuses').listen('StatusCreated', ({status}) => {
                 this.statuses.unshift(status);
-            })
+            });
         },
         computed: {
             getUrl(){

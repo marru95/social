@@ -44,7 +44,7 @@ class CreateStatusTest extends TestCase
         Event::assertDispatched(StatusCreated::class, function($e){
            return $e->status->id === Status::first()->id
                 && $e->status instanceof StatusResource
-                && $e->status->resource instanceof status
+                && $e->status->resource instanceof Status
                 && $e instanceof ShouldBroadcast;
         });
 
