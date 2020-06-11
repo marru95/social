@@ -24,7 +24,6 @@ class CanRequestFriendshipTest extends TestCase
     }
 
     /** @test */
-
     public function can_create_friendship_request()
     {
 
@@ -65,7 +64,6 @@ class CanRequestFriendshipTest extends TestCase
     }
 
     /** @test */
-
     public function senders_can_delete_sent_friendship_request()
     {
 
@@ -124,9 +122,9 @@ class CanRequestFriendshipTest extends TestCase
 
 
     }
-    /** @test */
 
-    public function recipient_can_delete_sent_received_friendship_request()
+    /** @test */
+    public function recipient_can_delete_received_friendship_request()
     {
 
         $sender = factory(User::class)->create();
@@ -155,6 +153,37 @@ class CanRequestFriendshipTest extends TestCase
     }
 
     /** @test */
+    public function recipients_can_delete_denied_friendship_request()
+    {
+
+        $sender = factory(User::class)->create();
+        $recipient = factory(User::class)->create();
+
+        Friendship::create([
+            'sender_id' => $sender->id,
+            'recipient_id' => $recipient->id,
+            'status' => 'denied'
+
+        ]);
+
+
+        $response = $this->actingAs($recipient)->deleteJson(route('friendships.destroy', $sender));
+
+        $response->assertJson([
+            'friendship_status' => 'deleted'
+        ]);
+
+        $this->assertDatabaseMissing('friendships', [
+            'sender_id' => $sender->id,
+            'recipient_id' => $recipient->id,
+            'status' => 'denied'
+
+        ]);
+
+
+    }
+
+    /** @test */
     //Los invitados no puedan crear solicitudes de amistad
     public function guest_users_cannot_delete_friendship_request()
     {
@@ -167,7 +196,6 @@ class CanRequestFriendshipTest extends TestCase
     }
 
     /** @test */
-
     public function can_accept_friendship_request()
     {
 
@@ -196,6 +224,7 @@ class CanRequestFriendshipTest extends TestCase
         ]);
 
     }
+
     /** @test */
     //Los invitados no puedan crear solicitudes de amistad
     public function guest_users_cannot_accept_friendship_request()
@@ -210,7 +239,6 @@ class CanRequestFriendshipTest extends TestCase
     }
 
     /** @test */
-
     public function can_deny_friendship_request()
     {
 
@@ -241,6 +269,7 @@ class CanRequestFriendshipTest extends TestCase
         ]);
 
     }
+
     /** @test */
     //Los invitados no puedan crear solicitudes de amistad
     public function guest_users_cannot_deny_friendship_request()
