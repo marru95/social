@@ -2128,16 +2128,25 @@ __webpack_require__.r(__webpack_exports__);
       comments: this.status.comments
     };
   },
+  mounted: function mounted() {
+    var _this = this;
+
+    Echo.channel("statuses.".concat(this.status.id, ".comments")).listen('CommentCreated', function (_ref) {
+      var comment = _ref.comment;
+
+      _this.comments.push(comment);
+    });
+  },
   methods: {
     addComment: function addComment() {
-      var _this = this;
+      var _this2 = this;
 
       axios.post("/statuses/".concat(this.status.id, "/comments"), {
         body: this.newComment
       }).then(function (res) {
-        _this.newComment = '';
+        _this2.newComment = '';
 
-        _this.comments.push(res.data.data);
+        _this2.comments.push(res.data.data);
       })["catch"](function (err) {
         console.log(err.response.data);
       });
