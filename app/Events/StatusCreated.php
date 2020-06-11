@@ -20,6 +20,7 @@ class StatusCreated implements ShouldBroadcast
      */
     public function __construct($status)
     {
+        $this->dontBroadcastToCurrentUser();
 
         $this->status = $status;
     }
