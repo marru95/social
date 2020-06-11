@@ -2,10 +2,13 @@
 
 namespace Tests\Feature;
 
+use App\Http\Resources\StatusResource;
+use App\Models\Status;
 use App\User;
-use Symfony\Component\Mime\Header\IdentificationHeader;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Events\StatusCreated;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CreateStatusTest extends TestCase
@@ -26,6 +29,10 @@ class CreateStatusTest extends TestCase
      */
     public function an_authenticated_user_can_create_statuses()
     {
+
+        Event::fake([StatusCreated::class]);
+
+
         $this->withoutExceptionHandling();
         // 1. Given => Teniendo un usuario autenticado
         $user=factory(User::class)->create();
@@ -33,6 +40,13 @@ class CreateStatusTest extends TestCase
 
         // 2. When => Cuando hace un post request a status
         $response = $this->post(route('statuses.store'), ['body'=>'Mi primer estado']);
+
+        Event::assertDispatched(StatusCreated::class, function($e){
+           return $e->status->id === Status::first()->id
+                && $e->status instanceof StatusResource
+                && $e->status->resource instanceof status
+                && $e instanceof ShouldBroadcast;
+        });
 
         $response->assertJson([
             'data'=>['body'=>'Mi primer estado'],
