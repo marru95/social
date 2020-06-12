@@ -44790,7 +44790,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c(
-          "small",
+          "div",
           {
             staticClass:
               "badge badge-pill badge-primary py-1 px-2 mt-2 float-right",

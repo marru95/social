@@ -9,11 +9,11 @@
                     {{ comment.body }}
                 </div>
             </div>
-            <small class="badge badge-pill badge-primary py-1 px-2 mt-2 float-right" dusk="comment-likes-count">
+            <div class="badge badge-pill badge-primary py-1 px-2 mt-2 float-right" dusk="comment-likes-count">
                 <i class="fa fa-thumbs-up"></i>
                 {{ comment.likes_count }}
 
-            </small>
+            </div>
 
 
             <like-btn

@@ -35,6 +35,7 @@ class UsersCanLikeCommentsTest extends DuskTestCase
                 ->press('@comment-like-btn')
                 ->waitForText('ME GUSTA')
                 ->assertSee('ME GUSTA')
+                ->pause(1000)
                 ->assertSeeIn('@comment-likes-count', 0)
 
             ;
