@@ -2198,7 +2198,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _StatusListItem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StatusListItem */ "./resources/js/components/StatusListItem.vue");
 //
 //
 //
@@ -2211,11 +2210,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    StatusListItem: _StatusListItem__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
   props: {
     url: String
   },
@@ -57418,6 +57413,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 window.EventBus = new Vue();
 Vue.component('status-form', __webpack_require__(/*! ./components/StatusForm */ "./resources/js/components/StatusForm.vue")["default"]);
 Vue.component('status-list', __webpack_require__(/*! ./components/StatusList */ "./resources/js/components/StatusList.vue")["default"]);
+Vue.component('status-list-item', __webpack_require__(/*! ./components/StatusListItem */ "./resources/js/components/StatusListItem.vue")["default"]);
 Vue.component('friendship-btn', __webpack_require__(/*! ./components/FriendshipBtn */ "./resources/js/components/FriendshipBtn.vue")["default"]);
 Vue.component('accept-friendship-btn', __webpack_require__(/*! ./components/AcceptFriendshipBtn */ "./resources/js/components/AcceptFriendshipBtn.vue")["default"]);
 Vue.component('notification-list', __webpack_require__(/*! ./components/NotificationList */ "./resources/js/components/NotificationList.vue")["default"]);
@@ -58267,8 +58263,8 @@ module.exports = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/marru/Escritorio/vagrant/social/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/marru/Escritorio/vagrant/social/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/vagrant/projects/social/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/vagrant/projects/social/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
