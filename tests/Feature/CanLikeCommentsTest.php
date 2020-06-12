@@ -30,6 +30,7 @@ class CanLikeCommentsTest extends TestCase
     //Un usuario autenticado puede dar like a los comentarios
     public function an_authenticated_user_can_like_and_unlike_comments()
     {
+        \Notification::fake();
 
         $this->withoutExceptionHandling();
 
