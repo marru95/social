@@ -2226,6 +2226,13 @@ __webpack_require__.r(__webpack_exports__);
     LikeBtn: _LikeBtn__WEBPACK_IMPORTED_MODULE_0__["default"],
     CommentList: _CommentList__WEBPACK_IMPORTED_MODULE_1__["default"],
     CommentForm: _CommentForm__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    Echo.channel("statuses.".concat(this.status.id, ".likes")).listen('ModelLiked', function (e) {
+      _this.status.likes_count++;
+    });
   }
 });
 
