@@ -2,14 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\Http\Resources\StatusResource;
-use App\Models\Status;
 use App\User;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Support\Facades\Broadcast;
 use Tests\TestCase;
+use App\Models\Status;
 use App\Events\StatusCreated;
 use Illuminate\Support\Facades\Event;
+use App\Http\Resources\StatusResource;
+use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CreateStatusTest extends TestCase
@@ -58,7 +57,7 @@ class CreateStatusTest extends TestCase
         Broadcast::shouldReceive('socket')->andReturn('socket-id');
 
         $this->withoutExceptionHandling();
-        // 1. Given => Teniendo un usuario autenticado
+
         $user=factory(User::class)->create();
 
 
@@ -66,17 +65,17 @@ class CreateStatusTest extends TestCase
         $this->actingAs($user)->post(route('statuses.store'), ['body'=>'Mi primer estado']);
 
         Event::assertDispatched(StatusCreated::class, function($statusCreatedEvent){
-            $this->assertInstanceOf(ShouldBroadcast::class, $statusCreatedEvent);
             $this->assertInstanceOf(StatusResource::class, $statusCreatedEvent->status);
-            $this->assertInstanceOf(Status::class, $statusCreatedEvent->status->resource);
-            $this->assertEquals(Status::first()->id, $statusCreatedEvent->status->id);
-            $this->assertEquals(
-                'socket-id',
-                $statusCreatedEvent->socket,
-                'The event' . get_class($statusCreatedEvent) . 'must call the method "dontBroadcastToCurrentUser" in the constructor.');
+            $this->assertTrue(Status::first()->is($statusCreatedEvent->status->resource));
+            $this->assertEventChannelType('public', $statusCreatedEvent);
+            $this->assertEventChannelName('statuses', $statusCreatedEvent);
+            $this->assertDontBroadcastToCurrentUser($statusCreatedEvent);
+
             return true;
         });
     }
+
+
 
 
     /**

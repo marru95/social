@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 
+use App\Events\ModelLiked;
 use App\Models\Like;
 
 trait HasLikes
@@ -11,12 +12,14 @@ trait HasLikes
     {
         return $this->morphMany(Like::class, 'likeable');
     }
+
     public function like()
     {
-
         $this->likes()->firstOrCreate([
             'user_id' => auth()->id()
         ]);
+
+        ModelLiked::dispatch($this);
     }
     public function unlike()
     {
@@ -33,5 +36,10 @@ trait HasLikes
     public function likesCount()
     {
         return $this->likes()->count();
+    }
+
+    public function eventChannelName()
+    {
+        return strtolower(str_plural(class_basename($this)) . "." . $this->getKey() . ".likes");
     }
 }
